@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mohammad Farhan Shaikh, frontend developer in Navi Mumbai</title>
+    <meta
+      name="description"
+      content="Frontend developer in Navi Mumbai building the map layer of real-time tracking systems: Deck.gl on Google Maps, live vehicle positions, route history and SQL analytics."
+    />
+    <link rel="canonical" href="https://mohammadfarhanshaikh.com/" />
+    <meta name="generator" content="Vite" />
+    <meta name="theme-color" content="#ECEDE8" />
+    <meta name="color-scheme" content="light dark" />
+
+    <script>
+      // Set the theme before first paint so a saved dark preference never flashes light.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var dark =
+            saved === 'dark' ||
+            (saved !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        } catch (e) {}
+      })();
+    </script>
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .motion [data-split], .motion [data-reveal] { visibility: visible !important; }
+      </style>
+    </noscript>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mohammadfarhanshaikh.com/" />
+    <meta property="og:site_name" content="Mohammad Farhan Shaikh" />
+    <meta property="og:title" content="Mohammad Farhan Shaikh, frontend developer in Navi Mumbai" />
+    <meta
+      property="og:description"
+      content="Frontend developer in Navi Mumbai building the map layer of real-time tracking systems: Deck.gl on Google Maps, live vehicle positions, route history and SQL analytics."
+    />
+    <meta property="og:image" content="https://mohammadfarhanshaikh.com/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mohammad Farhan Shaikh, frontend developer in Navi Mumbai" />
+    <meta
+      name="twitter:description"
+      content="Frontend developer in Navi Mumbai building the map layer of real-time tracking systems."
+    />
+    <meta name="twitter:image" content="https://mohammadfarhanshaikh.com/og.png" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/archivo-100_900-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fragment-mono-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <div id="loader" role="status" aria-live="polite">
+      <div class="loader__inner">
+        <div class="loader__head" data-loader-out>
+          <p class="mono">Plotting the sheet</p>
+          <p class="mono">Navi Mumbai</p>
+        </div>
+        <div class="loader__foot" data-loader-out>
+          <p class="mono loader__hint">A route through five waypoints</p>
+          <p class="loader__count num"><span data-loader-count>000</span><span class="loader__total"> / 100</span></p>
+        </div>
+        <div class="loader__bar" data-loader-bar data-loader-out></div>
+      </div>
+    </div>
+
+    <div id="app"></div>
+
+    <script>
+      // The sheet counts on its own, from the first paint, so the loader never waits on the app.
+      (function () {
+        var root = document.getElementById('loader');
+        if (!root) return;
+        var count = root.querySelector('[data-loader-count]');
+        var bar = root.querySelector('[data-loader-bar]');
+        var MIN = 0.8;
+        var t0 = performance.now();
+        function frame() {
+          var e = (performance.now() - t0) / 1000;
+          var v = Math.min(100, (e / MIN) * 100);
+          var r = Math.round(v);
+          if (count) count.textContent = (r < 10 ? '00' : r < 100 ? '0' : '') + r;
+          if (bar) bar.style.transform = 'scaleX(' + v / 100 + ')';
+          if (v < 100) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+        // If the app never boots, the sheet still lifts.
+        window.__loaderFallback = setTimeout(function () {
+          root.classList.add('is-out');
+          root.hidden = true;
+          document.documentElement.classList.add('is-loaded');
+        }, 2600);
+      })();
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
